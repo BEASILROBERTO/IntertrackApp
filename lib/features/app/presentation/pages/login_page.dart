@@ -58,6 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                 labelText: "Ingresa tu contraseña",
               ),
               style: TextStyle(fontSize: 14),
+              obscureText: true,
             ),
             SizedBox(
               height: 25,

@@ -4,7 +4,6 @@ import 'package:intertrack/features/app/presentation/pages/user_page.dart';
 import 'package:intertrack/features/app/presentation/screens/speech_screen.dart';
 import 'features/app/presentation/pages/login_page.dart';
 import 'package:intertrack/services/notificacion.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -12,15 +11,6 @@ import 'dart:convert';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if (kIsWeb) {
-    await Firebase.initializeApp(
-        options: FirebaseOptions(
-            apiKey: "AIzaSyC0ofIuDy10JuM7MgZdNYFOHAn5Yv6PEOo",
-            appId: "1:352398970381:web:d17c6da36735b98d17cf44",
-            messagingSenderId: "352398970381",
-            projectId: "intertrack-fb"));
-  }
-  await Firebase.initializeApp();
   await initNotifications();
   runApp(MyApp());
 }
