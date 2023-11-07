@@ -1,16 +1,9 @@
-# intertrack
+# Intertrack GPS APP
 
-A new Flutter project.
+An emergency GPS app to help others when in an emergency.
 
-## Getting Started
+## Installing local setup
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1.- Clone git repo. <br/>
+2.- cd into it and run `flutter pub get` to install dependencies. <br/>
+3.- Press either F5 or run `flutter run` in terminal to run project. <br/>
