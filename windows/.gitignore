@@ -15,3 +15,10 @@ x86/
 *.[Cc]ache
 # but keep track of directories ending in .cache
 !*.[Cc]ache/
+
+# Auto-created files when cloning proyect
+.flutter-plugins
+.flutter-plugins-dependencies
+.package_config_subset
+package_config.json
+version

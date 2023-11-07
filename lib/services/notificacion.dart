@@ -35,8 +35,5 @@ Future<void> showNotificacion() async {
   );
 
   await flutterLocalNotificationsPlugin.show(
-      1,
-      'Titulo de notificacion',
-      'Esta es una notificación de prueba para mostrar en el canal. Los quiero mucho.',
-      notificationDetails);
+      1, 'Titulo de notificacion', 'Test', notificationDetails);
 }
