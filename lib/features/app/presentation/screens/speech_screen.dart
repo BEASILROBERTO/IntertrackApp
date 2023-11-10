@@ -6,7 +6,6 @@ import 'dart:convert';
 
 class SpeechScreen extends StatefulWidget {
   @override
-  // ignore: library_private_types_in_public_api
   _SpeechScreenState createState() => _SpeechScreenState();
 }
 
@@ -22,7 +21,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
       url,
       headers: {
         'Content-Type': 'application/json',
-        'origin': 'http://localhost'
+        'origin': 'http://localhost',
       },
       body: json.encode({
         'service_id': serviceId,
@@ -42,6 +41,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
   bool _isListening = false;
   String _text = 'Presiona para hablar';
   double _confidence = 1.0;
+  bool _emailSent = false; // Variable de estado para realizar un seguimiento del correo enviado
 
   @override
   void initState() {
@@ -91,17 +91,21 @@ class _SpeechScreenState extends State<SpeechScreen> {
         onStatus: (val) => print('onStatus: $val'),
         onError: (val) => print('onError: $val'),
       );
+      //Aqui se modifico debido a que yamaba varias veces al email dando el problema de los 1000 correos
       if (available) {
         setState(() => _isListening = true);
         _speech.listen(
-          // localeId: selectedLocale.localeId,
           onResult: (val) => setState(() {
             _text = val.recognizedWords;
             if (val.hasConfidenceRating && val.confidence > 0) {
               _confidence = val.confidence;
             }
             if (_text.contains('emergencia') || _text.contains('emergency')) {
-              sendEmail(); // Llama a sendEmail() cuando se detecta "emergencia" en el texto
+              if (!_emailSent) {
+                sendEmail();
+                _showEmailSentDialog();
+                _emailSent = true;
+              }
             }
           }),
         );
@@ -110,5 +114,25 @@ class _SpeechScreenState extends State<SpeechScreen> {
       setState(() => _isListening = false);
       _speech.stop();
     }
+  }
+//aqui esta lo del pop up por si quieren referencias 
+  void _showEmailSentDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Correo Enviado"),
+          content: Text("Su correo se envió con éxito."),
+          actions: <Widget>[
+            TextButton(
+              child: Text("Aceptar"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
